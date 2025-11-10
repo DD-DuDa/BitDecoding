@@ -1,11 +1,14 @@
-# BitLadder
+# [HPCA 2025] BitDecoding
+[![arXiv](https://img.shields.io/badge/arXiv-2410.13276-b31b1b.svg)](https://arxiv.org/abs/2503.18773)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-BitLadder is a high-performance, GPU-optimized system
+BitDecoding is a high-performance, GPU-optimized system
 designed to accelerate long-context LLMs decoding with a low-bit KV
 cache. Achieve **3-9x speedup** than Flash Attention-v2.
 ![overview](imgs/overview.png)
-![scheme](imgs/scheme.png)
+
+## News
+* [2025.11] 🔥 BitDecoding has been accepted to HPCA 2025! 
 
 ## Benchmark
 * Kernel Performance in RTX4090
@@ -15,9 +18,9 @@ cache. Achieve **3-9x speedup** than Flash Attention-v2.
 
 ## Installation
 ```
-git clone --recursive https://github.com/DD-DuDa/BitLadder.git
-conda create -n bitladder python=3.10
-conda activate bitladder
+git clone --recursive https://github.com/DD-DuDa/BitDecoding.git
+conda create -n bitdecode python=3.10
+conda activate bitdecode
 pip install -r requirements.txt
 python setup.py install
 ```
@@ -35,6 +38,19 @@ python setup.py install
     ```
 3. End2end inference example, please see [e2e](https://github.com/DD-DuDa/BitDecoding/tree/e2e)
 
+## Citation
+If you find BitDecoding useful or want to use in your projects, please kindly cite our paper:
+```
+@misc{du2025bitdecodingunlockingtensorcores,
+      title={BitDecoding: Unlocking Tensor Cores for Long-Context LLMs with Low-Bit KV Cache}, 
+      author={Dayou Du and Shijie Cao and Jianyi Cheng and Luo Mai and Ting Cao and Mao Yang},
+      year={2025},
+      eprint={2503.18773},
+      archivePrefix={arXiv},
+      primaryClass={cs.AR},
+      url={https://arxiv.org/abs/2503.18773}, 
+}
+```
 
 ## Acknowledgement
 BitLadder is inspired by many open-source libraries, including (but not limited to) [flash-attention](https://github.com/Dao-AILab/flash-attention/tree/main), [flute](https://github.com/HanGuo97/flute), [Atom](https://github.com/efeslab/Atom), [omniserve](https://github.com/mit-han-lab/omniserve), [KIVI](https://github.com/jy-yuan/KIVI).
