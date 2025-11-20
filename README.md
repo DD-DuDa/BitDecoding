@@ -1,4 +1,4 @@
-# [HPCA 2025] BitDecoding
+# [HPCA 2026] BitDecoding
 [![arXiv](https://img.shields.io/badge/arXiv-2410.13276-b31b1b.svg)](https://arxiv.org/abs/2503.18773)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
