@@ -1,11 +1,19 @@
-# [HPCA 2026] BitDecoding
+![overview](imgs/title.png)
+
+<div align="center">
+
+## Efficient low-bit KV cache decoding
+
 [![arXiv](https://img.shields.io/badge/arXiv-2410.13276-b31b1b.svg)](https://arxiv.org/abs/2503.18773)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
+</div>
+
+
 BitDecoding is a high-performance, GPU-optimized system
 designed to accelerate long-context LLMs decoding with a low-bit KV
-cache. Achieve **3-9x speedup** than Flash Attention-v2.
-![overview](imgs/overview.png)
+cache. Achieve **3-9x speedup** than Flash-Decoding-v2.
+
 
 ## News
 * [2025.11] 🔥 BitDecoding has been accepted to HPCA 2025! 
