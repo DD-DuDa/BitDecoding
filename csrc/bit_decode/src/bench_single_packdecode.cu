@@ -125,7 +125,7 @@ double TestBatchDecodingKernelPerformance(int batch_size, int seqlen_kv, const s
 }
 
 int main() {
-    const int num_heads    = 128;
+    const int num_heads    = 32;
     const int num_heads_kv = 8;
     const int head_dim     = 128;
 
@@ -142,50 +142,50 @@ int main() {
     }
 
     const int outer_repeat = 3, inner_repeat = 3;
-    // printf("\n######## Benchmark single decode ########\n");
-    // for (int j = 0; j < test_num; j++) {
+    printf("\n######## Benchmark single decode ########\n");
+    for (int j = 0; j < test_num; j++) {
 
-    //     int seqlen_kv = len_list[j];
-    //     double max_msec = 0.0;
-    //     double min_msec = DBL_MAX;
-    //     double total_msec = 0.0;
-
-    //     for (int k = 0; k < outer_repeat; k++) {
-    //         double this_sec = TestDecodingKernelPerformance<num_heads, num_heads_kv, head_dim, num_bits>(seqlen_kv, quant_mode, group_size, inner_repeat);
-    //         max_msec = max(max_msec, this_sec);
-    //         min_msec = min(min_msec, this_sec);
-    //         total_msec += this_sec;
-    //     }
-
-    //     double avg_msec = total_msec / outer_repeat;
-    //     printf("seqlen_kv num_heads head_dim = %6d %6d %6d, ", seqlen_kv, num_heads, head_dim);
-    //     printf("Time = %12.8lf %12.8lf %12.8lf ms, \n", min_msec, avg_msec, max_msec);
-    // }
-
-    // Batch decode benchmark (new)
-    const int batch_sizes[] = {8, 32, 128};
-    const int num_batch_tests = 3;
-    const int fixed_seqlen_kv = 8192;
-
-    printf("\n######## Benchmark batch decode (seq_len=%d) ########\n", fixed_seqlen_kv);
-    for (int j = 0; j < num_batch_tests; j++) {
-
-        int batch_size = batch_sizes[j];
+        int seqlen_kv = len_list[j];
         double max_msec = 0.0;
         double min_msec = DBL_MAX;
         double total_msec = 0.0;
 
         for (int k = 0; k < outer_repeat; k++) {
-            double this_sec = TestBatchDecodingKernelPerformance<num_heads, num_heads_kv, head_dim, num_bits>(batch_size, fixed_seqlen_kv, quant_mode, group_size, inner_repeat);
+            double this_sec = TestDecodingKernelPerformance<num_heads, num_heads_kv, head_dim, num_bits>(seqlen_kv, quant_mode, group_size, inner_repeat);
             max_msec = max(max_msec, this_sec);
             min_msec = min(min_msec, this_sec);
             total_msec += this_sec;
         }
 
         double avg_msec = total_msec / outer_repeat;
-        printf("batch_size seqlen_kv num_heads head_dim = %6d %6d %6d %6d, ", batch_size, fixed_seqlen_kv, num_heads, head_dim);
+        printf("seqlen_kv num_heads head_dim = %6d %6d %6d, ", seqlen_kv, num_heads, head_dim);
         printf("Time = %12.8lf %12.8lf %12.8lf ms, \n", min_msec, avg_msec, max_msec);
     }
+
+    // Batch decode benchmark (new)
+    // const int batch_sizes[] = {8, 32, 128};
+    // const int num_batch_tests = 3;
+    // const int fixed_seqlen_kv = 8192;
+
+    // printf("\n######## Benchmark batch decode (seq_len=%d) ########\n", fixed_seqlen_kv);
+    // for (int j = 0; j < num_batch_tests; j++) {
+
+    //     int batch_size = batch_sizes[j];
+    //     double max_msec = 0.0;
+    //     double min_msec = DBL_MAX;
+    //     double total_msec = 0.0;
+
+    //     for (int k = 0; k < outer_repeat; k++) {
+    //         double this_sec = TestBatchDecodingKernelPerformance<num_heads, num_heads_kv, head_dim, num_bits>(batch_size, fixed_seqlen_kv, quant_mode, group_size, inner_repeat);
+    //         max_msec = max(max_msec, this_sec);
+    //         min_msec = min(min_msec, this_sec);
+    //         total_msec += this_sec;
+    //     }
+
+    //     double avg_msec = total_msec / outer_repeat;
+    //     printf("batch_size seqlen_kv num_heads head_dim = %6d %6d %6d %6d, ", batch_size, fixed_seqlen_kv, num_heads, head_dim);
+    //     printf("Time = %12.8lf %12.8lf %12.8lf ms, \n", min_msec, avg_msec, max_msec);
+    // }
 
     return 0;
 }

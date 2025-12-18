@@ -23,7 +23,7 @@ def benchmark_single_decode(seq_len, provider):
     dtype = torch.float16
 
     batch_size = 1
-    nheads = 128
+    nheads = 32
     nheads_k = 8
     d = 128
 
@@ -60,7 +60,7 @@ def benchmark_batch_decode(batch_size, provider, seq_len=8192):
     device = "cuda"
     dtype = torch.float16
 
-    nheads = 128
+    nheads = 32
     nheads_k = 8
     d = 128
 
@@ -80,5 +80,5 @@ def benchmark_batch_decode(batch_size, provider, seq_len=8192):
 
 
 if __name__ == "__main__":
-    # benchmark_single_decode.run(show_plots=True, print_data=True)
-    benchmark_batch_decode.run(show_plots=True, print_data=True)
+    benchmark_single_decode.run(show_plots=True, print_data=True)
+    # benchmark_batch_decode.run(show_plots=True, print_data=True)
