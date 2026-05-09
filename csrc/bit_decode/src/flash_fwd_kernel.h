@@ -70,7 +70,7 @@ inline __device__ void compute_attn_1rowblock_residualkv(const Params &params, c
     using ElementKVPack = typename Kernel_traits::ElementKVPack;
     using ElementAccum  = typename Kernel_traits::ElementAccum;
     using index_t       = typename Kernel_traits::index_t;
-    using SharedStorage = typename Kernel_traits::SharedStorage;
+    using SharedStorage = typename Kernel_traits::SharedStorage_residual;
 
     // Shared memory.
     extern __shared__ char smem_[];

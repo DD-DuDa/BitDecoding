@@ -687,8 +687,8 @@ void kvcache_qpack(const at::Tensor &k, at::Tensor &k_pack, at::Tensor &k_params
 
 PYBIND11_MODULE(TORCH_EXTENSION_NAME, m) {
     m.doc() = "BitDecoding";
-    // m.def("kvcache_pack_i2", &kvcache_qpack<2>, "Forward pass, kvcache quantization and packing (2-bit)");
+    m.def("kvcache_pack_int2", &kvcache_qpack<2>, "Forward pass, kvcache quantization and packing (2-bit)");
     m.def("kvcache_pack_int4", &kvcache_qpack<4>, "Forward pass, kvcache quantization and packing (4-bit)");
-    // m.def("fwd_kvcache_i2",  &mha_fwd_kvcache<2>, "Forward pass, with 2-bit KV-cache");
+    m.def("fwd_kvcache_int2",  &mha_fwd_kvcache<2>, "Forward pass, with 2-bit KV-cache");
     m.def("fwd_kvcache_int4",  &mha_fwd_kvcache<4>, "Forward pass, with 4-bit KV-cache");
 }

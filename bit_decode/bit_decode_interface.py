@@ -32,15 +32,17 @@ def kvcache_pack_int(k_cache: torch.Tensor, k_pack: torch.Tensor, k_params: torc
                                           quant_mode,
                                           group_size
                                          )
-    # else:
-    #     bit_decode_cuda.kvcache_pack_int2(K_unpad, k_pack, k_params,
-    #                                        V_unpad, v_pack, v_params,
-    #                                        opt_block_table,
-    #                                        cu_seqlens_k,
-    #                                        seqlen_k,
-    #                                        quant_mode,
-    #                                        group_size
-    #                                        )
+    elif num_bits == 2:
+        bit_decode_cuda.kvcache_pack_int2(K_unpad, k_pack, k_params,
+                                          V_unpad, v_pack, v_params,
+                                          opt_block_table,
+                                          cu_seqlens_k,
+                                          seqlen_k,
+                                          quant_mode,
+                                          group_size
+                                         )
+    else:
+        raise ValueError(f"Unsupported num_bits={num_bits}; expected 2 or 4")
 
 def fwd_kvcache_int(q: torch.Tensor, 
                     k_pack: torch.Tensor, k_params: torch.Tensor, 
@@ -78,26 +80,28 @@ def fwd_kvcache_int(q: torch.Tensor,
             True,           # Added
             0               # Added
         )
-    # else:
-    #     out_bit, k_pack_new, k_params_new, v_pack_new, v_params_new = bit_decode_cuda.fwd_kvcache_int2(
-    #         q,
-    #         k_pack, k_params, 
-    #         v_pack, v_params,
-    #         opt_k_new, opt_v_new, opt_seqlens_k,
-    #         k_pack_new, k_params_new, v_pack_new, v_params_new,
-    #         opt_block_table,
-    #         softmax_scale,
-    #         quant_mode, 
-    #         group_size,
-    #         residual_block_size,
-    #         new_lens,
-    #         False,          # Added
-    #         -1,             # Added
-    #         -1,             # Added
-    #         0.0,            # Added
-    #         True,           # Added
-    #         0               # Added
-    #     )
+    elif num_bits == 2:
+        out_bit, k_pack_new, k_params_new, v_pack_new, v_params_new = bit_decode_cuda.fwd_kvcache_int2(
+            q,
+            k_pack, k_params,
+            v_pack, v_params,
+            opt_k_new, opt_v_new, opt_seqlens_k,
+            k_pack_new, k_params_new, v_pack_new, v_params_new,
+            opt_block_table,
+            softmax_scale,
+            quant_mode,
+            group_size,
+            residual_block_size,
+            new_lens,
+            False,          # Added
+            -1,             # Added
+            -1,             # Added
+            0.0,            # Added
+            True,           # Added
+            0               # Added
+        )
+    else:
+        raise ValueError(f"Unsupported num_bits={num_bits}; expected 2 or 4")
 
 
     return out_bit, k_pack_new, k_params_new, v_pack_new, v_params_new
