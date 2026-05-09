@@ -23,13 +23,16 @@ def main():
     parser.add_argument('--max_length', type=int, default=131072, help='Maximum length of the input sequence')
     parser.add_argument('--num_bits', type=int, default=4, help='Number of bits for quantization')
     parser.add_argument('--quant_mode', type=str, default='k-channel', help='Quantization mode')
-    parser.add_argument('--group_size', type=int, default=128, help='Group size for quantization')
+    parser.add_argument('--group_size', type=int, default=None, help='Group size for quantization')
     parser.add_argument('--attn_backend', type=str, default='flash_attention_2', help='Attention implementation')
     args = parser.parse_args()
 
     # For reproducibility 
     random.seed(0)
     torch.manual_seed(0)
+
+    if args.group_size is None:
+        args.group_size = 32 if args.num_bits == 2 else 128
 
     if "Llama" in args.model_path:
         config = LlamaConfig.from_pretrained(args.model_path)
