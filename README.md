@@ -35,15 +35,16 @@ bash install.sh
 ## Citation
 If you find BitDecoding useful or want to use in your projects, please kindly cite our paper:
 ```
-@misc{du2025bitdecodingunlockingtensorcores,
-      title={BitDecoding: Unlocking Tensor Cores for Long-Context LLMs Decoding with Low-Bit KV Cache}, 
-      author={Dayou Du and Shijie Cao and Jianyi Cheng and Ting Cao and Mao Yang},
-      year={2025},
-      eprint={2503.18773},
-      archivePrefix={arXiv},
-      primaryClass={cs.AR},
-      url={https://arxiv.org/abs/2503.18773}, 
-}
+@INPROCEEDINGS{11408481,
+  author={Du, Dayou and Cao, Shijie and Cheng, Jianyi and Mai, Luo and Cao, Ting and Yang, Mao},
+  booktitle={2026 IEEE International Symposium on High Performance Computer Architecture (HPCA)}, 
+  title={BitDecoding: Unlocking Tensor Cores for Long-Context LLMs with Low-Bit KV Cache}, 
+  year={2026},
+  volume={},
+  number={},
+  pages={1-13},
+  keywords={Tensors;Quantization (signal);Layout;Graphics processing units;Computer architecture;Throughput;Decoding;Systems support;Kernel;Optimization},
+  doi={10.1109/HPCA68181.2026.11408481}}
 ```
 
 ## Acknowledgement
